@@ -4,7 +4,7 @@ Our team implemented Grpc using the protobuf-net package in our backend services
 
 We are using a Rest Web API that communicates with our Grpc Services. 
 
-During the Load Tests we performed using https://locust.io/ we encountered unpredictable and very response times when being executed by concurrent users (simulated by locust)
+During the Load Tests we performed using https://locust.io/ we encountered unpredictable and very high response times when being executed by concurrent users (simulated by locust)
 
 # Backend services
 Here is a list of the services that we have:
