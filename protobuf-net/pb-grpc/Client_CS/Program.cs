@@ -21,7 +21,7 @@ namespace Client_CS
             Warmup();
 
             TestSequential();
-            TestConcurrentReusingGrpcChannel();
+            TestSequentialReusingGrpcChannel();
             TestConcurrent();
             TestConcurrentReusingGrpcChannel();
 
@@ -39,22 +39,22 @@ namespace Client_CS
 
         static void TestSequential()
         {
-            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestSequential)} {TotalRequests} tasks");
+            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestSequential)} {TotalRequests} requests");
 
             var stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < TotalRequests; i++)
             {
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start task {i}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start request {i}");
 
                 var channel = new Channel("localhost", 10042, ChannelCredentials.Insecure);
                 var calculator = channel.CreateGrpcService<ICalculator>();
                 var result = calculator.GetTime();
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - End task {i}: {result}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - End request {i}: {result}");
 
             }
             stopwatch.Stop();
 
-            Console.WriteLine($"{DateTime.Now} - {nameof(TestSequential)} for {TotalRequests} tasks took: {stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"{DateTime.Now} - {nameof(TestSequential)} for {TotalRequests} requests took: {stopwatch.ElapsedMilliseconds}ms");
 
         }
 
@@ -62,38 +62,38 @@ namespace Client_CS
         {
             var channel = new Channel("localhost", 10042, ChannelCredentials.Insecure);
             var calculator = channel.CreateGrpcService<ICalculator>();
-            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestSequentialReusingGrpcChannel)} {TotalRequests} tasks");
+            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestSequentialReusingGrpcChannel)} {TotalRequests} requests");
 
             var stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < TotalRequests; i++)
             {
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start task {i}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start request {i}");
                 var result = calculator.GetTime();
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - End task {i}: {result}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - End request {i}: {result}");
 
             }
             stopwatch.Stop();
 
-            Console.WriteLine($"{DateTime.Now} - {nameof(TestSequentialReusingGrpcChannel)} for {TotalRequests} tasks took: {stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"{DateTime.Now} - {nameof(TestSequentialReusingGrpcChannel)} for {TotalRequests} requests took: {stopwatch.ElapsedMilliseconds}ms");
 
         }
 
         static void TestConcurrent()
         {
-            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestConcurrent)} {TotalRequests} tasks");
+            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestConcurrent)} {TotalRequests} requests");
 
             var stopwatch = Stopwatch.StartNew();
             Parallel.For(0, TotalRequests, parallelOptions, (i) =>
             {
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start task {i}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start request {i}");
                 var channel = new Channel("localhost", 10042, ChannelCredentials.Insecure);
                 var calculator = channel.CreateGrpcService<ICalculator>();
                 var result = calculator.GetTime();
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Result task {i} {result.Time}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Result request {i} {result.Time}");
             });
             stopwatch.Stop();
 
-            Console.WriteLine($"{DateTime.Now} - {nameof(TestConcurrent)} for {TotalRequests} tasks took: {stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"{DateTime.Now} - {nameof(TestConcurrent)} for {TotalRequests} requests took: {stopwatch.ElapsedMilliseconds}ms");
 
         }
 
@@ -102,17 +102,17 @@ namespace Client_CS
             var channel = new Channel("localhost", 10042, ChannelCredentials.Insecure);
             var calculator = channel.CreateGrpcService<ICalculator>();
 
-            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestConcurrentReusingGrpcChannel)} {TotalRequests} tasks");
+            Console.WriteLine($"{DateTime.Now} - Starting {nameof(TestConcurrentReusingGrpcChannel)} {TotalRequests} requests");
             var stopwatch = Stopwatch.StartNew();
             Parallel.For(0, TotalRequests, parallelOptions, (i) =>
             {
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start task {i}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Start request {i}");
                 var result = calculator.GetTime();
-                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Result task {i} {result.Time}");
+                if (LogDetails) Console.WriteLine($"{DateTime.Now} - Result request {i} {result.Time}");
             });
             stopwatch.Stop();
 
-            Console.WriteLine($"{DateTime.Now} - {nameof(TestConcurrentReusingGrpcChannel)} for {TotalRequests} tasks took: {stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"{DateTime.Now} - {nameof(TestConcurrentReusingGrpcChannel)} for {TotalRequests} requests took: {stopwatch.ElapsedMilliseconds}ms");
 
         }
     }

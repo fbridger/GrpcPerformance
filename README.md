@@ -47,8 +47,11 @@ So we are actually doing 4 type of tests:
 - Concurrent reusing the same gRPC channel
 - Concurrent using a new gRPC channel
 
-# Conclusion
+# Conclusions
 
+ - It seems that using Asp.Net Core to host a gRPC server slows severely the performance of the application.
+ - We encountered **unpredictable and slow** (specially in conncurrent requests) response times when hosting gRPC in ASP.NET Core
+ - Using Grpc.Core Server seems to be more performant
 
 
 # Available gRPC Samples used
@@ -106,28 +109,28 @@ Press any key to exit...
 Run # 1
 ```
 Warmup done
-5/21/2021 9:26:44 AM - Starting TestSequential 500 requests
-5/21/2021 9:26:47 AM - TestSequential for 500 requests took: 3392ms
-5/21/2021 9:26:47 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:26:47 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 48ms
-5/21/2021 9:26:47 AM - Starting TestConcurrent 500 requests
-5/21/2021 9:26:47 AM - TestConcurrent for 500 requests took: 169ms
-5/21/2021 9:26:47 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:26:47 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 42ms
+5/21/2021 10:21:35 AM - Starting TestSequential 500 requests
+5/21/2021 10:21:40 AM - TestSequential for 500 requests took: 5066ms
+5/21/2021 10:21:40 AM - Starting TestSequentialReusingGrpcChannel 500 requests
+5/21/2021 10:21:41 AM - TestSequentialReusingGrpcChannel for 500 requests took: 288ms
+5/21/2021 10:21:41 AM - Starting TestConcurrent 500 requests
+5/21/2021 10:21:41 AM - TestConcurrent for 500 requests took: 297ms
+5/21/2021 10:21:41 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
+5/21/2021 10:21:41 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 83ms
 Press [Enter] to exit
 ```
 
 Run # 2
 ```
 Warmup done
-5/21/2021 9:27:38 AM - Starting TestSequential 500 requests
-5/21/2021 9:27:42 AM - TestSequential for 500 requests took: 3471ms
-5/21/2021 9:27:42 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:27:42 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 40ms
-5/21/2021 9:27:42 AM - Starting TestConcurrent 500 requests
-5/21/2021 9:27:42 AM - TestConcurrent for 500 requests took: 126ms
-5/21/2021 9:27:42 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:27:42 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 34ms
+5/21/2021 10:23:35 AM - Starting TestSequential 500 requests
+5/21/2021 10:23:40 AM - TestSequential for 500 requests took: 5260ms
+5/21/2021 10:23:40 AM - Starting TestSequentialReusingGrpcChannel 500 requests
+5/21/2021 10:23:40 AM - TestSequentialReusingGrpcChannel for 500 requests took: 264ms
+5/21/2021 10:23:40 AM - Starting TestConcurrent 500 requests
+5/21/2021 10:23:41 AM - TestConcurrent for 500 requests took: 199ms
+5/21/2021 10:23:41 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
+5/21/2021 10:23:41 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 54ms
 Press [Enter] to exit
 ```
 ## pb-grpc - .Net Framework 4.7.2 - protobuf-net.Grpc.Native
@@ -136,28 +139,28 @@ Press [Enter] to exit
 Run # 1
 ```
 Warmup done
-5/21/2021 9:34:43 AM - Starting TestSequential 500 tasks
-5/21/2021 9:34:43 AM - TestSequential for 500 tasks took: 873ms
-5/21/2021 9:34:43 AM - Starting TestConcurrentReusingGrpcChannel 500 tasks
-5/21/2021 9:34:44 AM - TestConcurrentReusingGrpcChannel for 500 tasks took: 615ms
-5/21/2021 9:34:44 AM - Starting TestConcurrent 500 tasks
-5/21/2021 9:34:44 AM - TestConcurrent for 500 tasks took: 316ms
-5/21/2021 9:34:44 AM - Starting TestConcurrentReusingGrpcChannel 500 tasks
-5/21/2021 9:34:45 AM - TestConcurrentReusingGrpcChannel for 500 tasks took: 241ms
+5/21/2021 10:20:08 AM - Starting TestSequential 500 requests
+5/21/2021 10:20:09 AM - TestSequential for 500 requests took: 870ms
+5/21/2021 10:20:09 AM - Starting TestSequentialReusingGrpcChannel 500 requests
+5/21/2021 10:20:10 AM - TestSequentialReusingGrpcChannel for 500 requests took: 306ms
+5/21/2021 10:20:10 AM - Starting TestConcurrent 500 requests
+5/21/2021 10:20:10 AM - TestConcurrent for 500 requests took: 184ms
+5/21/2021 10:20:10 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
+5/21/2021 10:20:10 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 62ms
 Press [Enter] to exit
 ```
 
 Run # 2
 ```
 Warmup done
-5/21/2021 9:35:26 AM - Starting TestSequential 500 tasks
-5/21/2021 9:35:27 AM - TestSequential for 500 tasks took: 581ms
-5/21/2021 9:35:27 AM - Starting TestConcurrentReusingGrpcChannel 500 tasks
-5/21/2021 9:35:27 AM - TestConcurrentReusingGrpcChannel for 500 tasks took: 48ms
-5/21/2021 9:35:27 AM - Starting TestConcurrent 500 tasks
-5/21/2021 9:35:27 AM - TestConcurrent for 500 tasks took: 150ms
-5/21/2021 9:35:27 AM - Starting TestConcurrentReusingGrpcChannel 500 tasks
-5/21/2021 9:35:27 AM - TestConcurrentReusingGrpcChannel for 500 tasks took: 49ms
+5/21/2021 10:37:12 AM - Starting TestSequential 100 requests
+5/21/2021 10:37:13 AM - TestSequential for 100 requests took: 166ms
+5/21/2021 10:37:13 AM - Starting TestSequentialReusingGrpcChannel 100 requests
+5/21/2021 10:37:13 AM - TestSequentialReusingGrpcChannel for 100 requests took: 63ms
+5/21/2021 10:37:13 AM - Starting TestConcurrent 100 requests
+5/21/2021 10:37:13 AM - TestConcurrent for 100 requests took: 42ms
+5/21/2021 10:37:13 AM - Starting TestConcurrentReusingGrpcChannel 100 requests
+5/21/2021 10:37:13 AM - TestConcurrentReusingGrpcChannel for 100 requests took: 13ms
 Press [Enter] to exit
 ```
 
@@ -167,27 +170,27 @@ Press [Enter] to exit
 Run # 1
 ```
 Warmup done
-5/21/2021 9:32:17 AM - Starting TestSequential 500 requests
-5/21/2021 9:32:19 AM - TestSequential for 500 requests took: 1349ms
-5/21/2021 9:32:19 AM - Starting TestSequentialReusingGrpcChannel 500 requests
-5/21/2021 9:32:19 AM - TestSequentialReusingGrpcChannel for 500 requests took: 276ms
-5/21/2021 9:32:19 AM - Starting TestConcurrent 500 requests
-5/21/2021 9:32:27 AM - TestConcurrent for 500 requests took: 8059ms
-5/21/2021 9:32:27 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:32:34 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 6895ms
+5/21/2021 10:46:46 AM - Starting TestSequential 500 requests
+5/21/2021 10:46:47 AM - TestSequential for 500 requests took: 1834ms
+5/21/2021 10:46:47 AM - Starting TestSequentialReusingGrpcChannel 500 requests
+5/21/2021 10:46:48 AM - TestSequentialReusingGrpcChannel for 500 requests took: 347ms
+5/21/2021 10:46:48 AM - Starting TestConcurrent 500 requests
+5/21/2021 10:46:58 AM - TestConcurrent for 500 requests took: 10009ms
+5/21/2021 10:46:58 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
+5/21/2021 10:46:58 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 93ms
 Press [Enter] to exit
 ```
 
 Run # 2
 ```
 Warmup done
-5/21/2021 9:33:23 AM - Starting TestSequential 500 requests
-5/21/2021 9:33:25 AM - TestSequential for 500 requests took: 1449ms
-5/21/2021 9:33:25 AM - Starting TestSequentialReusingGrpcChannel 500 requests
-5/21/2021 9:33:25 AM - TestSequentialReusingGrpcChannel for 500 requests took: 296ms
-5/21/2021 9:33:25 AM - Starting TestConcurrent 500 requests
-5/21/2021 9:33:33 AM - TestConcurrent for 500 requests took: 7899ms
-5/21/2021 9:33:33 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
-5/21/2021 9:33:40 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 6895ms
+5/21/2021 10:47:40 AM - Starting TestSequential 500 requests
+5/21/2021 10:47:41 AM - TestSequential for 500 requests took: 1927ms
+5/21/2021 10:47:41 AM - Starting TestSequentialReusingGrpcChannel 500 requests
+5/21/2021 10:47:42 AM - TestSequentialReusingGrpcChannel for 500 requests took: 337ms
+5/21/2021 10:47:42 AM - Starting TestConcurrent 500 requests
+5/21/2021 10:47:51 AM - TestConcurrent for 500 requests took: 8745ms
+5/21/2021 10:47:51 AM - Starting TestConcurrentReusingGrpcChannel 500 requests
+5/21/2021 10:47:54 AM - TestConcurrentReusingGrpcChannel for 500 requests took: 3951ms
 Press [Enter] to exit
 ```

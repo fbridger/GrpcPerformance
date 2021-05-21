@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Condition="'$(ExampleRefs)'=='nuget'" Include="protobuf-net.Grpc" Version="$(PBGRPCLibVersion)" />
     <ProjectReference Condition="'$(ExampleRefs)'=='local'" Include="..\..\..\src\protobuf-net.Grpc\protobuf-net.Grpc.csproj" />
-    <PackageReference Include="Grpc.Net.Client" Version="$(GrpcDotNetVersion)" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.37.0" />
     <ProjectReference Include="..\Shared_CS\Shared_CS.csproj" />
   </ItemGroup>
 

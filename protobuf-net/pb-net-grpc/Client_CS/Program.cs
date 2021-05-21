@@ -9,7 +9,7 @@ namespace Client_CS
 {
     class Program
     {
-        private const int TotalRequests = 100;
+        private const int TotalRequests = 500;
         private const bool LogDetails = false;
         private static ParallelOptions parallelOptions = new ParallelOptions() { MaxDegreeOfParallelism = 50 };
 
