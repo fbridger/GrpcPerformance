@@ -49,10 +49,10 @@ So we are actually doing 4 type of tests:
 
 # Performance metrics captured
 
-![Sequential](images\Sequential.png)
-![Sequential same channel](images\Sequential_same_channel.png)
-![Concurrent](images\Concurrent.png)
-![Concurrent same channel](images\Concurrent_same_channel.png)
+![Sequential](images/Sequential.png)
+![Sequential same channel](images/Sequential_same_channel.png)
+![Concurrent](images/Concurrent.png)
+![Concurrent same channel](images/Concurrent_same_channel.png)
 
 ## Data
 | gRPC Server | Test Type | Total Requests | Total Elapsed (ms) | Min (ms) | Max (ms) | Average (ms) |
