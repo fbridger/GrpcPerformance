@@ -74,14 +74,12 @@ So we are actually doing 4 type of tests:
 | .Net Core 3.1 - protobuf-net.Grpc.AspNetCore | TestConcurrent | 5000 | 22773 | 0 | 1998 | 4.5546 |
 | .Net Core 3.1 - protobuf-net.Grpc.AspNetCore | TestConcurrentReusingGrpcChannel | 5000 | 496 | 0 | 1998 | 0.0992 |
 
-
-
 # Conclusions
 
- - It seems that using Asp.Net Core to host a gRPC server slows severely the performance of the application.
- - We encountered **unpredictable and slow** (specially in conncurrent requests) response times when hosting gRPC in ASP.NET Core
+ - The most common scenario in a production envionment is concurrent requests hitting the gRPC Server. Clearly, under this scenario hosting gRPC using ASP.NET Core is the least performant.
  - Using Grpc.Core Server seems to be more performant
-
+ - Data shows that **unpredictable and slow** (specially in conncurrent requests) response times were encountered when hosting gRPC in ASP.NET Core
+ - The only cases where we encountered those mentioned errors were in ASP.NET Core.
 
 # Available gRPC Samples used
 
