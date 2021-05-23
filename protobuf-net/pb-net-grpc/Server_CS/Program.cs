@@ -2,6 +2,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
 namespace Server_CS
 {
     public class Program
@@ -13,6 +15,10 @@ namespace Server_CS
 
         public static IWebHostBuilder CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+            })
                 .ConfigureKestrel(options =>
                 {
                     options.ListenLocalhost(10042, listenOptions =>
