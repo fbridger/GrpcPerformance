@@ -49,6 +49,12 @@ So we are actually doing 4 type of tests:
 
 # Performance metrics captured
 
+![Sequential](images\Sequential.png)
+![Sequential same channel](images\Sequential_same_channel.png)
+![Concurrent](images\Concurrent.png)
+![Concurrent same channel](images\Concurrent_same_channel.png)
+
+## Data
 | gRPC Server | Test Type | Total Requests | Total Elapsed (ms) | Min (ms) | Max (ms) | Average (ms) |
 | ----------- | --------- | -------------- | ------------------ | -------- | -------- | ------------ |
 | .Net Core 3.1 - Grpc.AspNetCore | TestSequential | 5000 | 16940 | 2 | 12 | 3.388 |
@@ -67,6 +73,7 @@ So we are actually doing 4 type of tests:
 | .Net Core 3.1 - protobuf-net.Grpc.AspNetCore | TestSequentialReusingGrpcChannel | 5000 | 1735 | 0 | 8 | 0.347 |
 | .Net Core 3.1 - protobuf-net.Grpc.AspNetCore | TestConcurrent | 5000 | 22773 | 0 | 1998 | 4.5546 |
 | .Net Core 3.1 - protobuf-net.Grpc.AspNetCore | TestConcurrentReusingGrpcChannel | 5000 | 496 | 0 | 1998 | 0.0992 |
+
 
 
 # Conclusions
